@@ -6,8 +6,7 @@ import com.github.alym62.challenge.backend.infrastructure.mappers.UsuarioMapper;
 import com.github.alym62.challenge.backend.infrastructure.repositories.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +17,7 @@ import java.util.List;
 public class UsuarioGatewayImpl implements UsuarioGateway {
     private final UsuarioRepository repository;
     private final UsuarioMapper mapper = UsuarioMapper.INSTANCE;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public List<Usuario> getList() {
@@ -40,6 +40,7 @@ public class UsuarioGatewayImpl implements UsuarioGateway {
             throw new RuntimeException("Ops! Usuário já cadastrado.");
         }
 
+        entity.setSenha(passwordEncoder.encode(entity.getSenha()));
         return mapper.persistenceToEntity(repository.save(mapper.entityToPersistence(entity)));
     }
 
