@@ -2,14 +2,14 @@ package com.github.alym62.challenge.backend.domain.core;
 
 import java.time.LocalDateTime;
 
-public abstract class AbstractEntity {
+public abstract class AbstractEntityCore {
     private Long id;
     private LocalDateTime dataCriacao;
     private LocalDateTime dataAtualizacao;
 
-    public AbstractEntity() {}
+    public AbstractEntityCore() {}
 
-    public AbstractEntity(Long id, LocalDateTime dataCriacao, LocalDateTime dataAtualizacao) {
+    public AbstractEntityCore(Long id, LocalDateTime dataCriacao, LocalDateTime dataAtualizacao) {
         this.id = id;
         this.dataCriacao = dataCriacao;
         this.dataAtualizacao = dataAtualizacao;

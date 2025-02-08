@@ -1,8 +1,8 @@
 package com.github.alym62.challenge.backend.domain.entities;
 
-import com.github.alym62.challenge.backend.domain.core.AbstractEntity;
+import com.github.alym62.challenge.backend.domain.core.AbstractEntityCore;
 
-public class Contato extends AbstractEntity {
+public class Contato extends AbstractEntityCore {
     private String nome;
     private String sobrenome;
     private String telefone;

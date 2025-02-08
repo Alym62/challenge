@@ -1,11 +1,11 @@
 package com.github.alym62.challenge.backend.domain.entities;
 
-import com.github.alym62.challenge.backend.domain.core.AbstractEntity;
+import com.github.alym62.challenge.backend.domain.core.AbstractEntityCore;
 import com.github.alym62.challenge.backend.domain.entities.enums.Permissao;
 
 import java.util.Set;
 
-public class Usuario extends AbstractEntity {
+public class Usuario extends AbstractEntityCore {
     private String email;
     private String senha;
     private Set<Permissao> permissoes;
