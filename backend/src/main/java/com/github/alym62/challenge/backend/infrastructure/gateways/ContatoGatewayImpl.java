@@ -2,6 +2,7 @@ package com.github.alym62.challenge.backend.infrastructure.gateways;
 
 import com.github.alym62.challenge.backend.domain.entities.Contato;
 import com.github.alym62.challenge.backend.domain.gateways.ContatoGateway;
+import com.github.alym62.challenge.backend.infrastructure.exceptions.BusinessException;
 import com.github.alym62.challenge.backend.infrastructure.mappers.ContatoMapper;
 import com.github.alym62.challenge.backend.infrastructure.repositories.ContatoRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ public class ContatoGatewayImpl implements ContatoGateway {
     public Contato getById(Long id) {
         return repository.findById(id)
                 .map(mapper::persistenceToEntity)
-                .orElseThrow(() -> new RuntimeException("Ops! Contato não encontrado."));
+                .orElseThrow(() -> new BusinessException("Ops! Contato não encontrado."));
     }
 
     @Override
@@ -37,7 +38,7 @@ public class ContatoGatewayImpl implements ContatoGateway {
     public Contato create(Contato entity) {
         var contatoExists = repository.findByEmail(entity.getEmail());
         if (contatoExists.isPresent()) {
-            throw new RuntimeException("Ops! Contato já cadastrado.");
+            throw new BusinessException("Ops! Contato já cadastrado.");
         }
 
         return mapper.persistenceToEntity(repository.save(mapper.entityToPersistence(entity)));

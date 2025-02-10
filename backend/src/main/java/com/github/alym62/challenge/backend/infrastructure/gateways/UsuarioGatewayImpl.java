@@ -2,6 +2,7 @@ package com.github.alym62.challenge.backend.infrastructure.gateways;
 
 import com.github.alym62.challenge.backend.domain.entities.Usuario;
 import com.github.alym62.challenge.backend.domain.gateways.UsuarioGateway;
+import com.github.alym62.challenge.backend.infrastructure.exceptions.BusinessException;
 import com.github.alym62.challenge.backend.infrastructure.mappers.UsuarioMapper;
 import com.github.alym62.challenge.backend.infrastructure.repositories.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ public class UsuarioGatewayImpl implements UsuarioGateway {
     public Usuario getById(Long id) {
         return repository.findById(id)
                 .map(mapper::persistenceToEntity)
-                .orElseThrow(() -> new RuntimeException("Ops! Usuário não encontrado."));
+                .orElseThrow(() -> new BusinessException("Ops! Usuário não encontrado."));
     }
 
     @Override
@@ -37,7 +38,7 @@ public class UsuarioGatewayImpl implements UsuarioGateway {
     public Usuario create(Usuario entity) {
         var usuarioExists = repository.findByEmail(entity.getEmail());
         if (usuarioExists.isPresent()) {
-            throw new RuntimeException("Ops! Usuário já cadastrado.");
+            throw new BusinessException("Ops! Usuário já cadastrado.");
         }
 
         entity.setSenha(passwordEncoder.encode(entity.getSenha()));

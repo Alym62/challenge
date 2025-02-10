@@ -3,15 +3,16 @@ package com.github.alym62.challenge.backend.application.controllers;
 import com.github.alym62.challenge.backend.application.dto.contato.ContatoRequestDTO;
 import com.github.alym62.challenge.backend.application.dto.contato.ContatoResponseDTO;
 import com.github.alym62.challenge.backend.application.services.ContatoService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -35,8 +36,9 @@ public class ContatoController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<ContatoResponseDTO> create(@RequestBody ContatoRequestDTO dto) {
-        return ResponseEntity.created(URI.create("")).body(service.create(dto));
+    public ResponseEntity<ContatoResponseDTO> create(@RequestBody @Valid ContatoRequestDTO dto) {
+        var dtoResponse = service.create(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(dtoResponse);
     }
 
     @PutMapping("/update/{id}")

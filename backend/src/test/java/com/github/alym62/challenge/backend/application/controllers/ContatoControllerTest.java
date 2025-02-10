@@ -50,6 +50,8 @@ class ContatoControllerTest {
         assertNotNull(body);
         assertEquals(request.nome(), body.nome());
         assertEquals(request.email(), body.email());
+        assertEquals(request.telefone(), body.telefone());
+        assertEquals(request.sobrenome(), body.sobrenome());
 
         var captor = ArgumentCaptor.forClass(ContatoRequestDTO.class);
         verify(contatoService, times(1)).create(captor.capture());
@@ -57,6 +59,8 @@ class ContatoControllerTest {
         var dto = captor.getValue();
         assertEquals(dto.nome(), request.nome());
         assertEquals(dto.email(), request.email());
+        assertEquals(dto.telefone(), request.telefone());
+        assertEquals(dto.sobrenome(), request.sobrenome());
     }
 
     @Test

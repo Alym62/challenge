@@ -1,22 +1,15 @@
 package com.github.alym62.challenge.backend.application.controllers;
 
-import com.github.alym62.challenge.backend.application.dto.contato.ContatoRequestDTO;
-import com.github.alym62.challenge.backend.application.dto.contato.ContatoResponseDTO;
 import com.github.alym62.challenge.backend.application.dto.usuario.UsuarioRequestDTO;
 import com.github.alym62.challenge.backend.application.dto.usuario.UsuarioResponseDTO;
-import com.github.alym62.challenge.backend.application.services.ContatoService;
 import com.github.alym62.challenge.backend.application.services.UsuarioService;
 import org.junit.jupiter.api.*;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;

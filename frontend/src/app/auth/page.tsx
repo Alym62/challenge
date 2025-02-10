@@ -43,7 +43,7 @@ const Auth = () => {
                     <Form.Item
                         label="Senha"
                         name="senha"
-                        rules={[{ required: true, min: 1, message: "A senha deve ter pelo menos 6 caracteres!" }]}
+                        rules={[{ required: true, min: 3, message: "A senha deve ter pelo menos 3 caracteres!" }]}
                     >
                         <Input.Password placeholder="Digite sua senha" />
                     </Form.Item>

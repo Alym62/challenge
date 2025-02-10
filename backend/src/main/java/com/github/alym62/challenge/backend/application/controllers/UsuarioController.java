@@ -3,11 +3,12 @@ package com.github.alym62.challenge.backend.application.controllers;
 import com.github.alym62.challenge.backend.application.dto.usuario.UsuarioRequestDTO;
 import com.github.alym62.challenge.backend.application.dto.usuario.UsuarioResponseDTO;
 import com.github.alym62.challenge.backend.application.services.UsuarioService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -22,8 +23,8 @@ public class UsuarioController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<UsuarioResponseDTO> create(@RequestBody UsuarioRequestDTO dto) {
-        return ResponseEntity.created(URI.create("")).body(service.create(dto));
+    public ResponseEntity<UsuarioResponseDTO> create(@RequestBody @Valid UsuarioRequestDTO dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(dto));
     }
 
     @PutMapping("/update/{id}")
