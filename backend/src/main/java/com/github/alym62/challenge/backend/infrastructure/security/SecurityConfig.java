@@ -4,6 +4,7 @@ import com.github.alym62.challenge.backend.infrastructure.repositories.UsuarioRe
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -50,7 +51,8 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/api/v1/contato/**").authenticated()
-                        .requestMatchers("/api/v1/usuario/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/usuario/list").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/usuario/**").authenticated()
                         .anyRequest().permitAll()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
